@@ -144,25 +144,25 @@
             position: absolute;
             bottom: calc(100% + 14px);
             left: 50%;
-            transform: translateX(-50%) translateY(8px);
-            background: var(--text-dark);
+            transform: translateX(-50%) translateY(0);
+            background: rgba(30, 41, 59, 0.95);
             color: white;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 11px;
             font-weight: 500;
             text-align: center;
             white-space: nowrap;
             pointer-events: none;
-            opacity: 0;
-            visibility: hidden;
+            opacity: 1;
+            visibility: visible;
             transition: all var(--transition);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
 
         .click-hint {
             display: block;
-            font-size: 11px;
+            font-size: 9px;
             color: #94a3b8;
             margin-top: 4px;
             font-weight: 400;
@@ -181,11 +181,16 @@
             border-color: var(--text-dark) transparent transparent transparent;
         }
 
+        /* Ensure tooltip scales up slightly with the pin on hover */
         .pin:hover .pin-tooltip,
         .pin:active .pin-tooltip {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(-4px) scale(1.05);
+            background: var(--primary-hover);
+        }
+        
+        .pin:hover .pin-tooltip::after,
+        .pin:active .pin-tooltip::after {
+            border-top-color: var(--primary-hover);
         }
 
         /* Modal / Lightbox */
@@ -394,6 +399,21 @@
             visibility: visible;
         }
 
+        /* Mobile Instruction Banner */
+        .mobile-instruction {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 20px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-hover);
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
         /* Mobile Adjustments */
         @media (max-width: 640px) {
             body { padding: 12px; }
@@ -401,7 +421,8 @@
             .site-header p { font-size: 14px; }
             .modal-overlay { padding: 0; }
             .modal-content { height: 100vh; border-radius: 0; }
-            .pin-tooltip { font-size: 13px; padding: 8px 12px; }
+            .pin-tooltip { display: none !important; }
+            .mobile-instruction { display: block; }
             .modal-title { font-size: 16px; }
             .viewer-helper h3 { font-size: 20px; }
             .viewer-helper p { font-size: 14px; }
@@ -422,6 +443,11 @@
         <img src="temple construction image.jpg" alt="Construction Site Overview" class="map-image" id="mapImage" draggable="false">
         <!-- Pins Overlay Layer -->
         <div id="pinsLayer"></div>
+    </div>
+    
+    <!-- Mobile specific instruction -->
+    <div class="mobile-instruction">
+        👉 Tap a blue dot on the map to explore the 360&deg; view
     </div>
 
     <!-- Modal Overlay -->
